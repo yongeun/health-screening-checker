@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const HealthScreeningChecker = () => {
   const [age, setAge] = useState('');
@@ -18,9 +18,18 @@ const HealthScreeningChecker = () => {
     "Other"
   ];
 
+  useEffect(() => {
+    checkScreenings();
+  }, [age, sex, race, isSmoker]);
+
   const checkScreenings = () => {
     const ageNum = parseInt(age);
     const screenings = [];
+
+    if (isNaN(ageNum)) {
+      setResults([]);
+      return;
+    }
 
     // Vaccines
     if (ageNum >= 0.5) {
@@ -28,7 +37,69 @@ const HealthScreeningChecker = () => {
       screenings.push("Flu Vaccine: Annual flu vaccine.");
     }
 
-    // ... (rest of the screening logic remains the same)
+    if (ageNum >= 11 && ageNum <= 26) {
+      screenings.push("HPV Vaccine: Two doses for ages 11-15, three doses for ages 15-26.");
+    }
+
+    if (ageNum >= 50) {
+      screenings.push("Shingles Vaccine: Shingrix, two doses 2 to 6 months apart.");
+    }
+
+    // Cancer Screenings
+    if (sex === 'female') {
+      if (ageNum >= 21 && ageNum <= 65) {
+        screenings.push("Cervical Cancer Screening: Every 3 years from 21 to 29, every 5 years from 30 to 65.");
+      }
+      if (ageNum >= 40 && ageNum <= 75) {
+        screenings.push("Breast Cancer Screening: Mammogram every 1 to 2 years.");
+      }
+    }
+
+    if (ageNum >= 45 && ageNum <= 75) {
+      screenings.push("Colorectal Cancer Screening: Colonoscopy every 10 years or annual stool screening.");
+    }
+
+    if (sex === 'male' && ageNum >= 50 && ageNum <= 69) {
+      screenings.push("Prostate Cancer Screening: Options include physical exam and PSA blood test.");
+    }
+
+    // Updated Lung Cancer Screening recommendation
+    if (ageNum >= 50 && ageNum <= 80 && isSmoker) {
+      screenings.push("Lung Cancer Screening: Annual chest CT scan recommended for current or former heavy smokers.");
+    }
+
+    // Disease Screenings
+    if (ageNum >= 18 && ageNum <= 79) {
+      screenings.push("Hepatitis B and C Screening: One-time blood test for Hepatitis C.");
+    }
+
+    if (ageNum >= 15 && ageNum <= 65) {
+      screenings.push("STI and HIV Screening: Regular testing based on sexual activity and risk factors.");
+    }
+
+    if (ageNum >= 35 && ageNum <= 75) {
+      screenings.push("Prediabetes and Type 2 Diabetes Screening: Regular screening for overweight or obese patients.");
+    }
+
+    if (sex === 'female' && ageNum >= 65) {
+      screenings.push("Osteoporosis Screening: DEXA bone scan.");
+    }
+
+    // Updated Abdominal Aortic Aneurysm Screening recommendation
+    if (sex === 'male' && ageNum >= 65 && ageNum <= 75 && isSmoker) {
+      screenings.push("Abdominal Aortic Aneurysm Screening: One-time screening recommended for men who have ever smoked.");
+    }
+
+    // Example of a race-specific recommendation
+    if (race === "Black or African American" && ageNum >= 45) {
+      screenings.push("Consider earlier colorectal cancer screening. Discuss with your doctor.");
+    }
+
+    // Smoking-related recommendations
+    if (isSmoker) {
+      screenings.push("Smoking Cessation: Consider programs and medications to help quit smoking.");
+      screenings.push("Cardiovascular Risk Assessment: Regular check-ups to assess heart disease risk.");
+    }
 
     setResults(screenings);
   };
@@ -97,12 +168,6 @@ const HealthScreeningChecker = () => {
         />
         <label htmlFor="smoker">History of smoking</label>
       </div>
-      <button 
-        onClick={checkScreenings}
-        style={{marginTop: '20px', padding: '10px', backgroundColor: 'blue', color: 'white', border: 'none', cursor: 'pointer'}}
-      >
-        Check Screenings
-      </button>
       {results.length > 0 && (
         <div style={{marginTop: '20px'}}>
           <h3 style={{fontSize: '18px', fontWeight: 'bold'}}>Recommended Screenings:</h3>
