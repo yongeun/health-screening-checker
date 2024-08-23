@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/health-screening-checker/static/css/main.55755ff6.css",
-    "main.js": "/health-screening-checker/static/js/main.b137b86f.js",
+    "main.css": "/health-screening-checker/static/css/main.837fd6c2.css",
+    "main.js": "/health-screening-checker/static/js/main.5ac75582.js",
     "static/js/453.efc47456.chunk.js": "/health-screening-checker/static/js/453.efc47456.chunk.js",
     "index.html": "/health-screening-checker/index.html",
-    "main.55755ff6.css.map": "/health-screening-checker/static/css/main.55755ff6.css.map",
-    "main.b137b86f.js.map": "/health-screening-checker/static/js/main.b137b86f.js.map",
+    "main.837fd6c2.css.map": "/health-screening-checker/static/css/main.837fd6c2.css.map",
+    "main.5ac75582.js.map": "/health-screening-checker/static/js/main.5ac75582.js.map",
     "453.efc47456.chunk.js.map": "/health-screening-checker/static/js/453.efc47456.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.55755ff6.css",
-    "static/js/main.b137b86f.js"
+    "static/css/main.837fd6c2.css",
+    "static/js/main.5ac75582.js"
   ]
 }
